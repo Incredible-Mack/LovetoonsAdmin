@@ -20,7 +20,7 @@
                 data-accordion="false">
 
                 <li class="nav-item">
-                    <a href="dashboard" class="nav-link">
+                    <a href="{{ url('dashboard')}}" class="nav-link">
                         <i class="nav-icon fas fa-th"></i>
                         <p>
                             Dashboard
@@ -40,7 +40,7 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="product" class="nav-link">
+                            <a href="{{ url('addvideo') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Add Videos</p>
                             </a>
@@ -49,9 +49,9 @@
 
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="addproduct" class="nav-link">
+                            <a href="{{ url('updatevideo') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Delete Videos </p>
+                                <p>Update Videos </p>
                             </a>
                         </li>
                     </ul>
@@ -60,7 +60,7 @@
                         <li class="nav-item">
                             <a href="" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Product Setting</p>
+                                <p>User Uploaded Video</p>
                             </a>
                         </li>
                     </ul>
