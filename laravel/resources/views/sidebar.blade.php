@@ -58,9 +58,9 @@
 
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="" class="nav-link">
+                            <a href="{{ url('lrdb') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>User Uploaded Video</p>
+                                <p>Uploaded Video</p>
                             </a>
                         </li>
                     </ul>

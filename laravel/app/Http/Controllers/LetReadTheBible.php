@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\biblevideo;
 use App\Models\letReadTheBibleVideo;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\File;
@@ -67,14 +68,26 @@ class LetReadTheBible extends Controller
         
         public function deletevideo(Request $request){
             $videoItem  = $request->id;
-            // Update the record
+            
+            $type = $request->type;
+
+  
             
             try {
                 // Update the record
-                letReadTheBibleVideo::where('id', $videoItem)->update([
-                    'status' => 'deleted',
-                    // Add more columns and values as needed
-                ]);
+                if($type === 'biblevideo')
+                    {
+                        biblevideo::where('id', $videoItem)->update([
+                            'deleteStatus' => 'deleted',
+                        ]);
+
+                        
+                    }else{
+                        letReadTheBibleVideo::where('id', $videoItem)->update([
+                            'status' => 'deleted',
+                        ]);
+                    }
+               
                 
                 // If the update is successful, return a success message
                 return response()->json(['message' => 'Video deleted successfully'], 200);
@@ -91,13 +104,7 @@ class LetReadTheBible extends Controller
         
         
         public function editvideo ($id){
-            // try{
-            //     $videos = letReadTheBibleVideo::find($id)->first();
-            //     return view('readthebible/editevideo', compact('videos'));
-
-            // }catch (ModelNotFoundException $e) {
-            //          return view('404');
-            // }
+            
             try {
                 $videos = letReadTheBibleVideo::findOrFail($id);
                 return view('readthebible.editvideo', compact('videos'));
@@ -160,7 +167,31 @@ class LetReadTheBible extends Controller
         }        
 
     
-        
+        public function fetchuploadedvideo(){
+            $videos  = $videos = biblevideo::where('deleteStatus', '!=', 'deleted')->get();
+            return view('readthebible.uploadedvideo', compact('videos'));
+
+        }
+
+        public function confirmvideo(Request $request){
+
+            try{
+                $id = $request->input('id');
+                biblevideo::where('id', $id )->update([
+                    'status' => 1
+                ]);
+
+                return response()->json(['message' => 'successfully updated video status'], 200);
+
+            }catch(Exception $e){
+                return response()->json(['error' => 'Failed'], 500);
+            }
+            
+
+
+
+         
+        }
         
         
     }
